@@ -198,11 +198,6 @@ if tank_name:
         "maintenance": [],
         "diary": []
     }
-            "mode": "Fish Only",
-            "data": [],
-            "maintenance": [],
-            "diary": []
-        }
         st.session_state.selected_tank = tank_name
         save_tanks()
 
