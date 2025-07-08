@@ -1,0 +1,38 @@
+{
+  "Eheim Jager 300W": {
+    "wattage": 300
+  },
+  "Fluval M200": {
+    "wattage": 200
+  },
+  "Cobalt Neo-Therm 150W": {
+    "wattage": 150
+  },
+  "Reef Octopus Classic 110": {
+    "rated_tank_l": 400
+  },
+  "Bubble Magus Curve 5": {
+    "rated_tank_l": 500
+  },
+  "Tunze DOC 9004": {
+    "rated_tank_l": 300
+  },
+  "Sicce Syncra Silent 2.0": {
+    "flow_lph": 1800
+  },
+  "Neptune COR-15": {
+    "flow_lph": 3800
+  },
+  "Jebao DCP-5000": {
+    "flow_lph": 5000
+  },
+  "Bean Animal": {
+    "recommended_flow_lph": 5000
+  },
+  "Herbie": {
+    "recommended_flow_lph": 3000
+  },
+  "Durso": {
+    "recommended_flow_lph": 2000
+  }
+}
