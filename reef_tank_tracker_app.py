@@ -111,6 +111,7 @@ def load_tanks():
     return {}
 
 def save_tanks():
+    pass  # inserted to fix empty function block
 
 # Default modes
 default_modes = {
