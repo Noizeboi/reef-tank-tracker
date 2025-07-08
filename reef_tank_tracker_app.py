@@ -457,15 +457,7 @@ with st.expander("🔧 Equipment Configuration", expanded=True):
                     for tip in export_suggestions:
                         pdf.cell(200, 8, txt=strip_unicode(f"• {tip}"), ln=True)
 
-from io import BytesIO
-pdf_buffer = BytesIO()
-pdf.output(pdf_buffer)
-pdf_data = pdf_buffer.getvalue()
-
-st.download_button(
-    label="📄 Download Tank Report PDF",
-    data=pdf_data,
-    file_name="tank_report.pdf",
-    mime="application/pdf"
-)
+                pdf_output_path = "/mnt/data/tank_report.pdf"
+                pdf.output(pdf_output_path)
+                with open(pdf_output_path, "rb") as f:
                     st.download_button("📄 Save PDF", f, file_name="tank_report.pdf")
