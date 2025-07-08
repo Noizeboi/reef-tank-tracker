@@ -183,8 +183,8 @@ with st.sidebar:
     st.header("🌊 Reef Tank Tracker")
     tank_name = st.text_input("Add New Tank")
     if st.button("➕ Add Tank") and tank_name:
+if tank_name:
     st.session_state['tanks'][tank_name] = {
-            "display_capacity": None,
             "sump_capacity": None,
             "theme": "",
             "livestock": "",
