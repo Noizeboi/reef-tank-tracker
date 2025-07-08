@@ -98,16 +98,14 @@ os.makedirs(IMAGE_DIR, exist_ok=True)
 
 # Load and Save
 def load_tanks():
-    if os.path.exists(SAVE_FILE):
-            st.session_state.custom_modes = data.get("custom_modes", {})
-            tanks = data.get("tanks", {})
-            for t in tanks.values():
-                img = t.get("profile_image")
-                if isinstance(img, str) and not os.path.exists(os.path.join(IMAGE_DIR, img)):
-                    t["profile_image"] = None
-            return tanks
-    return {}
-
+    try:
+        with open(SAVE_FILE, "r") as f:
+            data = json.load(f)
+        st.session_state.tanks = data.get("tanks", {})
+        st.session_state.custom_modes = data.get("custom_modes", {})
+    except FileNotFoundError:
+        st.session_state.tanks = {}
+        st.session_state.custom_modes = {}
 def save_tanks():
     pass  # inserted to fix empty function block
 
