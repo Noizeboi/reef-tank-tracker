@@ -1,0 +1,302 @@
+[
+  {
+    "brand": "Cade",
+    "model": "We 0",
+    "display_capacity": 139,
+    "sump_capacity": 107,
+    "recommended_mode": "SPS",
+    "bundled_equipment": {
+      "LED Light": "Light0",
+      "Heater": "Model-H0",
+      "Skimmer": "Skim0",
+      "ATO System": "ATO-0",
+      "Return Pump": "Pump0",
+      "Overflow Type": "Bean Animal V0"
+    }
+  },
+  {
+    "brand": "Waterbox",
+    "model": "Dark 1",
+    "display_capacity": 301,
+    "sump_capacity": 22,
+    "recommended_mode": "LPS",
+    "bundled_equipment": {
+      "LED Light": "Light1",
+      "Heater": "Model-H1",
+      "Skimmer": "Skim1",
+      "ATO System": "ATO-1",
+      "Return Pump": "Pump1",
+      "Overflow Type": "Bean Animal V1"
+    }
+  },
+  {
+    "brand": "Innovative Marine",
+    "model": "War 2",
+    "display_capacity": 251,
+    "sump_capacity": 109,
+    "recommended_mode": "Fish Only",
+    "bundled_equipment": {
+      "LED Light": "Light2",
+      "Heater": "Model-H2",
+      "Skimmer": "Skim2",
+      "ATO System": "ATO-2",
+      "Return Pump": "Pump2",
+      "Overflow Type": "Bean Animal V2"
+    }
+  },
+  {
+    "brand": "Cade",
+    "model": "Bill 3",
+    "display_capacity": 285,
+    "sump_capacity": 42,
+    "recommended_mode": "SPS",
+    "bundled_equipment": {
+      "LED Light": "Light3",
+      "Heater": "Model-H3",
+      "Skimmer": "Skim3",
+      "ATO System": "ATO-3",
+      "Return Pump": "Pump3",
+      "Overflow Type": "Bean Animal V3"
+    }
+  },
+  {
+    "brand": "Red Sea",
+    "model": "Message 4",
+    "display_capacity": 290,
+    "sump_capacity": 36,
+    "recommended_mode": "SPS",
+    "bundled_equipment": {
+      "LED Light": "Light4",
+      "Heater": "Model-H4",
+      "Skimmer": "Skim4",
+      "ATO System": "ATO-4",
+      "Return Pump": "Pump4",
+      "Overflow Type": "Bean Animal V0"
+    }
+  },
+  {
+    "brand": "Red Sea",
+    "model": "General 5",
+    "display_capacity": 182,
+    "sump_capacity": 42,
+    "recommended_mode": "SPS",
+    "bundled_equipment": {
+      "LED Light": "Light5",
+      "Heater": "Model-H5",
+      "Skimmer": "Skim5",
+      "ATO System": "ATO-5",
+      "Return Pump": "Pump5",
+      "Overflow Type": "Bean Animal V1"
+    }
+  },
+  {
+    "brand": "Innovative Marine",
+    "model": "Late 6",
+    "display_capacity": 203,
+    "sump_capacity": 114,
+    "recommended_mode": "LPS",
+    "bundled_equipment": {
+      "LED Light": "Light6",
+      "Heater": "Model-H6",
+      "Skimmer": "Skim6",
+      "ATO System": "ATO-6",
+      "Return Pump": "Pump6",
+      "Overflow Type": "Bean Animal V2"
+    }
+  },
+  {
+    "brand": "Fluval",
+    "model": "Order 7",
+    "display_capacity": 294,
+    "sump_capacity": 62,
+    "recommended_mode": "SPS",
+    "bundled_equipment": {
+      "LED Light": "Light7",
+      "Heater": "Model-H7",
+      "Skimmer": "Skim7",
+      "ATO System": "ATO-7",
+      "Return Pump": "Pump7",
+      "Overflow Type": "Bean Animal V3"
+    }
+  },
+  {
+    "brand": "Innovative Marine",
+    "model": "Time 8",
+    "display_capacity": 129,
+    "sump_capacity": 90,
+    "recommended_mode": "LPS",
+    "bundled_equipment": {
+      "LED Light": "Light8",
+      "Heater": "Model-H8",
+      "Skimmer": "Skim8",
+      "ATO System": "ATO-8",
+      "Return Pump": "Pump8",
+      "Overflow Type": "Bean Animal V0"
+    }
+  },
+  {
+    "brand": "Red Sea",
+    "model": "Garden 9",
+    "display_capacity": 195,
+    "sump_capacity": 42,
+    "recommended_mode": "Fish Only",
+    "bundled_equipment": {
+      "LED Light": "Light9",
+      "Heater": "Model-H9",
+      "Skimmer": "Skim9",
+      "ATO System": "ATO-9",
+      "Return Pump": "Pump9",
+      "Overflow Type": "Bean Animal V1"
+    }
+  },
+  {
+    "brand": "Red Sea",
+    "model": "Activity 10",
+    "display_capacity": 153,
+    "sump_capacity": 94,
+    "recommended_mode": "SPS",
+    "bundled_equipment": {
+      "LED Light": "Light10",
+      "Heater": "Model-H10",
+      "Skimmer": "Skim10",
+      "ATO System": "ATO-10",
+      "Return Pump": "Pump10",
+      "Overflow Type": "Bean Animal V2"
+    }
+  },
+  {
+    "brand": "Waterbox",
+    "model": "Now 11",
+    "display_capacity": 195,
+    "sump_capacity": 45,
+    "recommended_mode": "LPS",
+    "bundled_equipment": {
+      "LED Light": "Light11",
+      "Heater": "Model-H11",
+      "Skimmer": "Skim11",
+      "ATO System": "ATO-11",
+      "Return Pump": "Pump11",
+      "Overflow Type": "Bean Animal V3"
+    }
+  },
+  {
+    "brand": "Cade",
+    "model": "Research 12",
+    "display_capacity": 122,
+    "sump_capacity": 34,
+    "recommended_mode": "SPS",
+    "bundled_equipment": {
+      "LED Light": "Light12",
+      "Heater": "Model-H12",
+      "Skimmer": "Skim12",
+      "ATO System": "ATO-12",
+      "Return Pump": "Pump12",
+      "Overflow Type": "Bean Animal V0"
+    }
+  },
+  {
+    "brand": "Red Sea",
+    "model": "Produce 13",
+    "display_capacity": 70,
+    "sump_capacity": 77,
+    "recommended_mode": "Fish Only",
+    "bundled_equipment": {
+      "LED Light": "Light13",
+      "Heater": "Model-H13",
+      "Skimmer": "Skim13",
+      "ATO System": "ATO-13",
+      "Return Pump": "Pump13",
+      "Overflow Type": "Bean Animal V1"
+    }
+  },
+  {
+    "brand": "Innovative Marine",
+    "model": "Task 14",
+    "display_capacity": 109,
+    "sump_capacity": 113,
+    "recommended_mode": "Fish Only",
+    "bundled_equipment": {
+      "LED Light": "Light14",
+      "Heater": "Model-H14",
+      "Skimmer": "Skim14",
+      "ATO System": "ATO-14",
+      "Return Pump": "Pump14",
+      "Overflow Type": "Bean Animal V2"
+    }
+  },
+  {
+    "brand": "Fluval",
+    "model": "Model 15",
+    "display_capacity": 190,
+    "sump_capacity": 113,
+    "recommended_mode": "Fish Only",
+    "bundled_equipment": {
+      "LED Light": "Light15",
+      "Heater": "Model-H15",
+      "Skimmer": "Skim15",
+      "ATO System": "ATO-15",
+      "Return Pump": "Pump15",
+      "Overflow Type": "Bean Animal V3"
+    }
+  },
+  {
+    "brand": "Red Sea",
+    "model": "Trouble 16",
+    "display_capacity": 209,
+    "sump_capacity": 32,
+    "recommended_mode": "LPS",
+    "bundled_equipment": {
+      "LED Light": "Light16",
+      "Heater": "Model-H16",
+      "Skimmer": "Skim16",
+      "ATO System": "ATO-16",
+      "Return Pump": "Pump16",
+      "Overflow Type": "Bean Animal V0"
+    }
+  },
+  {
+    "brand": "Fluval",
+    "model": "Up 17",
+    "display_capacity": 276,
+    "sump_capacity": 57,
+    "recommended_mode": "Fish Only",
+    "bundled_equipment": {
+      "LED Light": "Light17",
+      "Heater": "Model-H17",
+      "Skimmer": "Skim17",
+      "ATO System": "ATO-17",
+      "Return Pump": "Pump17",
+      "Overflow Type": "Bean Animal V1"
+    }
+  },
+  {
+    "brand": "Fluval",
+    "model": "Baby 18",
+    "display_capacity": 204,
+    "sump_capacity": 68,
+    "recommended_mode": "LPS",
+    "bundled_equipment": {
+      "LED Light": "Light18",
+      "Heater": "Model-H18",
+      "Skimmer": "Skim18",
+      "ATO System": "ATO-18",
+      "Return Pump": "Pump18",
+      "Overflow Type": "Bean Animal V2"
+    }
+  },
+  {
+    "brand": "Waterbox",
+    "model": "True 19",
+    "display_capacity": 228,
+    "sump_capacity": 119,
+    "recommended_mode": "LPS",
+    "bundled_equipment": {
+      "LED Light": "Light19",
+      "Heater": "Model-H19",
+      "Skimmer": "Skim19",
+      "ATO System": "ATO-19",
+      "Return Pump": "Pump19",
+      "Overflow Type": "Bean Animal V3"
+    }
+  }
+]
