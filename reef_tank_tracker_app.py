@@ -173,8 +173,8 @@ def highlight_outliers(row, mode):
 
 # Load tanks
 st.session_state.tanks = load_tanks()
-selected_tank = st.session_state.get('selected_tank')
-tanks = st.session_state.get('tanks', {})
+if st.session_state.get('selected_tank') not in st.session_state.get('tanks', {}):
+    st.session_state['selected_tank'] = next(iter(st.session_state.get('tanks', {})), None)
 if selected_tank not in tanks:
     st.session_state['selected_tank'] = next(iter(tanks), None)
 
