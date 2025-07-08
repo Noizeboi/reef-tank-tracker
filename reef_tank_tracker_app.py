@@ -182,7 +182,14 @@ if selected_tank not in tanks:
 with st.sidebar:
     st.header("🌊 Reef Tank Tracker")
     tank_name = st.text_input("Add New Tank")
-    if st.button("➕ Add Tank") and tank_name:
+if st.button("➕ Add Tank") and tank_name:
+    st.session_state['tanks'][tank_name] = {
+        "mode": mode,
+        "equipment": selected_equipment,
+        "data": [],
+        "maintenance": [],
+        "diary": []
+    }
 if tank_name:
     st.session_state['tanks'][tank_name] = {
         "mode": mode,
@@ -246,7 +253,11 @@ if tank_name:
 # Main Interface
 st.title("🧪 Marine Reef Tank Tracker")
 
-if st.session_state.selected_tank:
+if st.session_state.get('selected_tank'):
+    tank = st.session_state.get('tanks', {}).get(st.session_state.get('selected_tank'))
+    if tank:
+        st.markdown("### Tank Overview")
+        st.json(tank)
 tank = st.session_state.get('tanks', {}).get(st.session_state.get('selected_tank'))
     tabs = st.tabs(["Overview", "Log Parameters", "Maintenance", "Diary", "Trends"])
 
