@@ -252,6 +252,7 @@ if st.session_state.selected_tank:
             tank["sump_capacity"] = st.number_input("Sump Capacity (L)", value=tank.get("sump_capacity") or 0.0)
             available_equipment = ["Heater", "LED Light", "Skimmer", "Auto Top-Off"]
         # 🔧 Equipment Selection
+            submitted = st.form_submit_button("Submit")
 
 # Equipment Configuration - Safe, Form-Free Version
 import json
