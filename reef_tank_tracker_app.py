@@ -185,11 +185,12 @@ with st.sidebar:
     if st.button("➕ Add Tank") and tank_name:
 if tank_name:
     st.session_state['tanks'][tank_name] = {
-            "sump_capacity": None,
-            "theme": "",
-            "livestock": "",
-            "equipment": [],
-            "profile_image": None,
+        "mode": mode,
+        "equipment": selected_equipment,
+        "data": [],
+        "maintenance": [],
+        "diary": []
+    }
             "mode": "Fish Only",
             "data": [],
             "maintenance": [],
