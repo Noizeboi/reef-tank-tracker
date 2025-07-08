@@ -261,7 +261,6 @@ if st.session_state.selected_tank:
             "Return Pump": [opt for opt in dropdown_models.get("Return Pumps", [])],
             "Overflow Type": [opt for opt in dropdown_models.get("Overflows", [])]
         }
- submitted = st.form_submit_button("Save Changes")
 
         tank["selected_equipment"] = tank.get("selected_equipment", {})
 
