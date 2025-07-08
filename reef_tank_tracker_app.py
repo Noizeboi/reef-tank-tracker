@@ -467,8 +467,21 @@ st.download_button(
     file_name="tank_report.pdf",
     mime="application/pdf"
 )
-                    st.download_button("📄 Save PDF", f, file_name="tank_report.pdf")
 
+
+pdf_buffer = generate_pdf_report(
+    tank_name=st.session_state.selected_tank,
+    tank_data=tank,
+    suggestions=suggest_maintenance(tank)
+)
+
+if pdf_buffer:
+    st.download_button(
+        label="📄 Download Tank Report PDF",
+        data=pdf_buffer,
+        file_name="tank_report.pdf",
+        mime="application/pdf"
+    )
 # PDF generation utility
 
 from fpdf import FPDF
