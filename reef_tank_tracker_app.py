@@ -198,7 +198,7 @@ if tank_name:
         "maintenance": [],
         "diary": []
     }
-        st.session_state.selected_tank = tank_name
+    st.session_state.selected_tank = tank_name
         save_tanks()
 
     if st.session_state.tanks:
