@@ -199,7 +199,7 @@ if tank_name:
         "diary": []
     }
     st.session_state.selected_tank = tank_name
-        save_tanks()
+    save_tanks()
 
     if st.session_state.tanks:
     tanks = st.session_state.get('tanks', {})
@@ -217,7 +217,7 @@ if tank_name:
     st.session_state.get('custom_modes', {}).setdefault(new_mode, {})[param] = (low, high)
             st.success(f"Added {param} to {new_mode}")
     if st.button("Save This Mode") and new_mode in st.session_state.get('custom_modes', {}):
-            save_tanks()
+    save_tanks()
             st.success(f"Saved mode: {new_mode}")
 
     with st.expander("🛠️ Manage Custom Modes"):
@@ -238,11 +238,11 @@ if tank_name:
                     updated[param] = (new_low, new_high)
             if st.button("💾 Save Changes"):
     st.session_state.get('custom_modes', {})[sel] = updated
-                save_tanks()
+    save_tanks()
                 st.success(f"Updated mode: {sel}")
             if st.button("🗑️ Delete This Mode"):
     del st.session_state.get('custom_modes', {})[sel]
-                save_tanks()
+    save_tanks()
                 st.experimental_rerun()
 
 # Main Interface
@@ -350,7 +350,7 @@ with st.expander("🔧 Equipment Configuration", expanded=True):
                 if profile_pic:
                     filename = f"{st.session_state.selected_tank}_profile_{profile_pic.name}"
                     tank["profile_image"] = filename
-                save_tanks()
+    save_tanks()
                 st.success("Saved")
 
     with tabs[1]:
@@ -361,7 +361,7 @@ with st.expander("🔧 Equipment Configuration", expanded=True):
                 log[param] = st.text_input(param)
             if st.form_submit_button("Submit Log"):
                 tank["data"].append(log)
-                save_tanks()
+    save_tanks()
                 st.success("Logged")
 
     with tabs[2]:
@@ -372,7 +372,7 @@ with st.expander("🔧 Equipment Configuration", expanded=True):
             notes = st.text_area("Notes")
             if st.form_submit_button("Add Entry"):
                 tank["maintenance"].append({"Date": str(m_date), "Task": task, "Notes": notes})
-                save_tanks()
+    save_tanks()
                 st.success("Added")
 
     with tabs[3]:
@@ -387,7 +387,7 @@ with st.expander("🔧 Equipment Configuration", expanded=True):
                     img_path = os.path.join(IMAGE_DIR, d_image.name)
                     entry["Image"] = d_image.name
                 tank["diary"].append(entry)
-                save_tanks()
+    save_tanks()
                 st.success("Added")
 
     with tabs[4]:
