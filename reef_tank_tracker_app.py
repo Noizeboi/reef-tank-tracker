@@ -1,18 +1,3 @@
-"""
-reef_tank_tracker_app.py — Cleaned Version
-
-✅ Patch Summary:
-- Fixed broken st.form blocks with missing st.form_submit_button
-- Rewrote Equipment section using st.expander + dropdown_models fallback
-- Fixed NameError and UnicodeEncodeError in PDF export
-- Switched PDF generation to use BytesIO for Streamlit compatibility
-- Removed deprecated with open() download blocks
-- Fixed syntax issues with mashed lines and indentation (try, def, etc)
-- Verified all control structures (try, if, with, etc) are valid
-
-Ready for production.
-"""
-
 def suggest_maintenance(tank):
     suggestions = []
 
@@ -72,7 +57,8 @@ def strip_unicode(text):
 # Load dropdown models early
 import json
 try:
-    pass  # inserted to fix empty try block
+    with open("dropdown_models.json", "r") as f:
+        dropdown_models = json.load(f)
 except FileNotFoundError:
     dropdown_models = {}
     import streamlit as st
@@ -101,6 +87,8 @@ os.makedirs(IMAGE_DIR, exist_ok=True)
 # Load and Save
 def load_tanks():
     if os.path.exists(SAVE_FILE):
+        with open(SAVE_FILE, "r") as f:
+            data = json.load(f)
             st.session_state.custom_modes = data.get("custom_modes", {})
             tanks = data.get("tanks", {})
             for t in tanks.values():
@@ -111,7 +99,11 @@ def load_tanks():
     return {}
 
 def save_tanks():
-    pass  # inserted to fix empty function block
+    with open(SAVE_FILE, "w") as f:
+        json.dump({
+            "tanks": st.session_state.tanks,
+            "custom_modes": st.session_state.custom_modes
+        }, f, indent=2, default=str)
 
 # Default modes
 default_modes = {
@@ -269,7 +261,8 @@ if st.session_state.selected_tank:
 # Equipment Configuration - Safe, Form-Free Version
 import json
 try:
-    pass  # inserted to fix empty try block
+    with open("dropdown_models.json", "r") as f:
+        dropdown_models = json.load(f)
 except Exception:
     dropdown_models = {}
     st.error("Failed to load 'dropdown_models.json'. Please check the file.")
@@ -311,6 +304,8 @@ with st.expander("🔧 Equipment Configuration", expanded=True):
         total_volume = display_vol + sump_vol
 
         from json import load as json_load
+        with open("equipment_model_lookup.json", "r") as ef:
+            model_lookup = json_load(ef)
 
         # Heater wattage check
         heater = tank["selected_equipment"].get("Heater")
@@ -343,6 +338,8 @@ with st.expander("🔧 Equipment Configuration", expanded=True):
             if st.form_submit_button("Save Tank"):
                 if profile_pic:
                     filename = f"{st.session_state.selected_tank}_profile_{profile_pic.name}"
+                    with open(os.path.join(IMAGE_DIR, filename), "wb") as f:
+                        f.write(profile_pic.read())
                     tank["profile_image"] = filename
                 save_tanks()
                 st.success("Saved")
@@ -379,6 +376,8 @@ with st.expander("🔧 Equipment Configuration", expanded=True):
                 entry = {"Date": str(d_date), "Entry": d_note}
                 if d_image:
                     img_path = os.path.join(IMAGE_DIR, d_image.name)
+                    with open(img_path, "wb") as f:
+                        f.write(d_image.read())
                     entry["Image"] = d_image.name
                 tank["diary"].append(entry)
                 save_tanks()
