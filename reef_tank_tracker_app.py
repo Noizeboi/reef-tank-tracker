@@ -252,13 +252,27 @@ if st.session_state.selected_tank:
             tank["sump_capacity"] = st.number_input("Sump Capacity (L)", value=tank.get("sump_capacity") or 0.0)
             available_equipment = ["Heater", "LED Light", "Skimmer", "Auto Top-Off"]
         # 🔧 Equipment Selection
+        st.subheader("🔧 Equipment Configuration")
+        equipment_options = {
+            "Heater": [opt for opt in dropdown_models.get("Heaters", [])],
+            "LED Light": [opt for opt in dropdown_models.get("LED Lights", [])],
+            "Skimmer": [opt for opt in dropdown_models.get("Skimmers", [])],
+            "ATO System": [opt for opt in dropdown_models.get("ATO Systems", [])],
+            "Return Pump": [opt for opt in dropdown_models.get("Return Pumps", [])],
+            "Overflow Type": [opt for opt in dropdown_models.get("Overflows", [])]
+        }
+ submitted = st.form_submit_button("Save Changes")
 
-with st.expander("Equipment Configuration"):
-    tank_equipment = tank.get("equipment", [])
-    selected_equipment = st.multiselect("Select Equipment", options=list(equipment_defaults.keys()), default=tank_equipment)
-    if st.button("Save Equipment Settings"):
-        tank["equipment"] = selected_equipment
-        st.success("Equipment updated successfully.")
+        tank["selected_equipment"] = tank.get("selected_equipment", {})
+
+        for eq_type, options in equipment_options.items():
+            tank["selected_equipment"][eq_type] = st.selectbox(
+                f"{eq_type} Model",
+                options,
+                index=options.index(tank["selected_equipment"].get(eq_type)) if tank["selected_equipment"].get(eq_type) in options else 0
+            )
+
+        # ✅ Equipment validation logic
         validation_notes = []
         display_vol = tank.get("display_capacity", 0.0)
         sump_vol = tank.get("sump_capacity", 0.0)
