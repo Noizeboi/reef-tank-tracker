@@ -49,6 +49,16 @@ def suggest_maintenance(tank):
 
 
 import streamlit as st
+
+# Load dropdown models early
+import json
+try:
+    with open("dropdown_models.json", "r") as f:
+        dropdown_models = json.load(f)
+except FileNotFoundError:
+    dropdown_models = {}
+    import streamlit as st
+    st.error("Missing dropdown_models.json – please check your repository.")
 import pandas as pd
 import json
 import os
