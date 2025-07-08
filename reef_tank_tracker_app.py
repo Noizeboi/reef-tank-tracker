@@ -64,9 +64,6 @@ def suggest_maintenance(tank):
 import streamlit as st
 
 # Utility to strip non-Latin1 characters for PDF safety
-def strip_unicode(text):
-    return text.encode("latin-1", errors="ignore").decode("latin-1")
-
 # Load dropdown models early
 import json
 try:
@@ -445,28 +442,18 @@ with st.expander("🔧 Equipment Configuration", expanded=True):
 
             # Export PDF
             if st.button("📄 Download PDF Report"):
-                pdf = FPDF()
                 pdf.add_page()
                 pdf.set_font("Arial", size=12)
-pdf.cell(200, 10, txt=strip_unicode(f"Tank Report: {st.session_state.get('selected_tank')}", ln=True))
-                pdf.cell(200, 10, txt=strip_unicode(f"Theme: {tank.get('theme', '')}"), ln=True)
-                pdf.cell(200, 10, txt=strip_unicode(f"Livestock: {tank.get('livestock', '')}"), ln=True)
-                pdf.cell(200, 10, txt=strip_unicode(f"Mode: {tank.get('mode', '')}"), ln=True)
 
                 if tank["data"]:
                     last_log = tank["data"][-1]
-                    pdf.cell(200, 10, txt=strip_unicode("Latest Parameters:"), ln=True)
                     for k, v in last_log.items():
-                        pdf.cell(200, 8, txt=strip_unicode(f"{k}: {v}"), ln=True)
 
                 if include_suggestions and export_suggestions:
-                    pdf.cell(200, 10, txt=strip_unicode("Suggested Maintenance:"), ln=True)
                     for tip in export_suggestions:
-                        pdf.cell(200, 8, txt=strip_unicode(f"• {tip}"), ln=True)
 
 from io import BytesIO
 pdf_buffer = BytesIO()
-pdf.output(pdf_buffer)
 pdf_data = pdf_buffer.getvalue()
 
 st.download_button(
@@ -477,7 +464,6 @@ st.download_button(
 )
 
 
-pdf_buffer = generate_pdf_report(
     tank_name=st.session_state.selected_tank,
     tank_data=tank,
     suggestions=suggest_maintenance(tank)
@@ -495,26 +481,15 @@ if pdf_buffer:
 from fpdf import FPDF
 from io import BytesIO
 
-def strip_unicode(text):
-    try:
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_font("Arial", size=12)
 
-        pdf.cell(200, 10, txt=strip_unicode(f"Tank Report: {tank_name}"), ln=True)
-
-        pdf.cell(200, 10, txt="Latest Parameters:", ln=True)
         latest = tank_data.get("data", [])[-1] if tank_data.get("data") else {}
         for key, value in latest.items():
-            pdf.cell(200, 8, txt=strip_unicode(f"{key}: {value}"), ln=True)
 
-        pdf.cell(200, 10, txt="\nMaintenance Suggestions:", ln=True)
         for tip in suggestions:
             pdf.multi_cell(0, 8, strip_unicode(f"• {tip}"))
 
         # Output to BytesIO
         pdf_buffer = BytesIO()
-        pdf.output(pdf_buffer)
         pdf_buffer.seek(0)
         return pdf_buffer
 
@@ -522,3 +497,24 @@ def strip_unicode(text):
         import streamlit as st
         st.error(f"PDF generation failed: {e}")
         return None
+
+# --- PDF Generation Utility ---
+def generate_pdf_report(tank_name, tank_data, suggestions):
+    from fpdf import FPDF
+    from io import BytesIO
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
+    pdf.cell(200, 10, txt=strip_unicode(f"Tank Report: {tank_name}"), ln=True)
+    pdf.cell(200, 10, txt="Latest Parameters:", ln=True)
+    latest = tank_data.get("data", [])[-1] if tank_data.get("data") else {}
+    for key, value in latest.items():
+        pdf.cell(200, 8, txt=strip_unicode(f"{key}: {value}"), ln=True)
+    if suggestions:
+        pdf.cell(200, 10, txt="\nMaintenance Suggestions:", ln=True)
+        for tip in suggestions:
+            pdf.multi_cell(0, 8, strip_unicode(f"• {tip}"))
+    pdf_buffer = BytesIO()
+    pdf.output(pdf_buffer)
+    pdf_buffer.seek(0)
+    return pdf_buffer
