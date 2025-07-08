@@ -1,5 +1,5 @@
-def suggest_maintenance(tank):
-    suggestions = []
+from utils import strip_unicode, generate_pdf_report, suggest_maintenance
+
 
     mode = tank.get("mode", "Fish Only")
     equipment = tank.get("equipment", [])
@@ -51,8 +51,6 @@ def suggest_maintenance(tank):
 import streamlit as st
 
 # Utility to strip non-Latin1 characters for PDF safety
-def strip_unicode(text):
-    return text.encode("latin-1", errors="ignore").decode("latin-1")
 
 # Load dropdown models early
 import json
