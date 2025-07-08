@@ -252,26 +252,47 @@ if st.session_state.selected_tank:
             tank["sump_capacity"] = st.number_input("Sump Capacity (L)", value=tank.get("sump_capacity") or 0.0)
             available_equipment = ["Heater", "LED Light", "Skimmer", "Auto Top-Off"]
         # 🔧 Equipment Selection
-        st.subheader("🔧 Equipment Configuration")
-        equipment_options = {
-            "Heater": [opt for opt in dropdown_models.get("Heaters", [])],
-            "LED Light": [opt for opt in dropdown_models.get("LED Lights", [])],
-            "Skimmer": [opt for opt in dropdown_models.get("Skimmers", [])],
-            "ATO System": [opt for opt in dropdown_models.get("ATO Systems", [])],
-            "Return Pump": [opt for opt in dropdown_models.get("Return Pumps", [])],
-            "Overflow Type": [opt for opt in dropdown_models.get("Overflows", [])]
-        }
 
-        tank["selected_equipment"] = tank.get("selected_equipment", {})
+# Equipment Configuration - Safe, Form-Free Version
+import json
+try:
+    with open("dropdown_models.json", "r") as f:
+        dropdown_models = json.load(f)
+except Exception:
+    dropdown_models = {}
+    st.error("Failed to load 'dropdown_models.json'. Please check the file.")
 
-        for eq_type, options in equipment_options.items():
-            tank["selected_equipment"][eq_type] = st.selectbox(
-                f"{eq_type} Model",
-                options,
-                index=options.index(tank["selected_equipment"].get(eq_type)) if tank["selected_equipment"].get(eq_type) in options else 0
-            )
+equipment_options = {
+    "Heater": dropdown_models.get("Heaters", []),
+    "LED Light": dropdown_models.get("LED Lights", []),
+    "Skimmer": dropdown_models.get("Skimmers", []),
+    "ATO System": dropdown_models.get("ATO Systems", []),
+    "Return Pump": dropdown_models.get("Return Pumps", []),
+    "Overflow Type": dropdown_models.get("Overflows", []),
+}
 
-        # ✅ Equipment validation logic
+with st.expander("🔧 Equipment Configuration", expanded=True):
+    tank["selected_equipment"] = tank.get("selected_equipment", {})
+    updated = False
+    for eq_type, options in equipment_options.items():
+        current = tank["selected_equipment"].get(eq_type)
+        index = options.index(current) if current in options else 0 if options else 0
+        selected = st.selectbox(
+            f"{eq_type} Model",
+            options,
+            index=index,
+            key=f"{eq_type}_select"
+        )
+        if selected != current:
+            tank["selected_equipment"][eq_type] = selected
+            updated = True
+
+    if st.button("Save Equipment Settings"):
+        if updated:
+            st.success("Equipment updated.")
+        else:
+            st.info("No changes detected.")
+
         validation_notes = []
         display_vol = tank.get("display_capacity", 0.0)
         sump_vol = tank.get("sump_capacity", 0.0)
