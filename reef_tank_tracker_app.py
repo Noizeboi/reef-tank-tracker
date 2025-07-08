@@ -441,21 +441,21 @@ with st.expander("🔧 Equipment Configuration", expanded=True):
                 pdf = FPDF()
                 pdf.add_page()
                 pdf.set_font("Arial", size=12)
-                pdf.cell(200, 10, txt=strip_unicode(f"Tank Report: {st.session_state.selected_tank}", ln=True)
-                pdf.cell(200, 10, txt=strip_unicode(f"Theme: {tank.get('theme', '')}", ln=True)
-                pdf.cell(200, 10, txt=strip_unicode(f"Livestock: {tank.get('livestock', '')}", ln=True)
-                pdf.cell(200, 10, txt=strip_unicode(f"Mode: {tank.get('mode', '')}", ln=True)
+                pdf.cell(200, 10, txt=strip_unicode(f"Tank Report: {st.session_state.selected_tank}"), ln=True)
+                pdf.cell(200, 10, txt=strip_unicode(f"Theme: {tank.get('theme', '')}"), ln=True)
+                pdf.cell(200, 10, txt=strip_unicode(f"Livestock: {tank.get('livestock', '')}"), ln=True)
+                pdf.cell(200, 10, txt=strip_unicode(f"Mode: {tank.get('mode', '')}"), ln=True)
 
                 if tank["data"]:
                     last_log = tank["data"][-1]
-                    pdf.cell(200, 10, txt=strip_unicode("Latest Parameters:", ln=True)
+                    pdf.cell(200, 10, txt=strip_unicode("Latest Parameters:"), ln=True)
                     for k, v in last_log.items():
-                        pdf.cell(200, 8, txt=strip_unicode(f"{k}: {v}", ln=True)
+                        pdf.cell(200, 8, txt=strip_unicode(f"{k}: {v}"), ln=True)
 
                 if include_suggestions and export_suggestions:
-                    pdf.cell(200, 10, txt=strip_unicode("Suggested Maintenance:", ln=True)
+                    pdf.cell(200, 10, txt=strip_unicode("Suggested Maintenance:"), ln=True)
                     for tip in export_suggestions:
-                        pdf.cell(200, 8, txt=strip_unicode(f"• {tip}", ln=True)
+                        pdf.cell(200, 8, txt=strip_unicode(f"• {tip}"), ln=True)
 
                 pdf_output_path = "/mnt/data/tank_report.pdf"
                 pdf.output(pdf_output_path)
