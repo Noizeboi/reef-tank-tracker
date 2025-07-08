@@ -144,7 +144,7 @@ default_modes = {
         "Magnesium (ppm)": (1300, 1400)
     }
 }
-combined_modes = {**default_modes, **st.session_state.custom_modes}
+combined_modes = {**default_modes, **st.session_state.get('custom_modes', {})}
 
 def check_alerts(params, mode):
     alerts = []
@@ -173,15 +173,17 @@ def highlight_outliers(row, mode):
 
 # Load tanks
 st.session_state.tanks = load_tanks()
-if st.session_state.selected_tank not in st.session_state.tanks:
-    st.session_state.selected_tank = next(iter(st.session_state.tanks), None)
+selected_tank = st.session_state.get('selected_tank')
+tanks = st.session_state.get('tanks', {})
+if selected_tank not in tanks:
+    st.session_state['selected_tank'] = next(iter(tanks), None)
 
 # Sidebar
 with st.sidebar:
     st.header("🌊 Reef Tank Tracker")
     tank_name = st.text_input("Add New Tank")
     if st.button("➕ Add Tank") and tank_name:
-        st.session_state.tanks[tank_name] = {
+    st.session_state['tanks'][tank_name] = {
             "display_capacity": None,
             "sump_capacity": None,
             "theme": "",
@@ -197,7 +199,8 @@ with st.sidebar:
         save_tanks()
 
     if st.session_state.tanks:
-        st.session_state.selected_tank = st.selectbox("Select Tank", list(st.session_state.tanks.keys()), index=0)
+    tanks = st.session_state.get('tanks', {})
+    st.session_state['selected_tank'] = st.selectbox("Select Tank", list(tanks.keys()), index=0)
 
     st.button("💾 Save All", on_click=save_tanks)
 
@@ -208,17 +211,17 @@ with st.sidebar:
         low = st.number_input("Min", value=0.0)
         high = st.number_input("Max", value=1.0)
         if st.button("Add to Custom Mode") and new_mode and param:
-            st.session_state.custom_modes.setdefault(new_mode, {})[param] = (low, high)
+    st.session_state.get('custom_modes', {}).setdefault(new_mode, {})[param] = (low, high)
             st.success(f"Added {param} to {new_mode}")
-        if st.button("Save This Mode") and new_mode in st.session_state.custom_modes:
+    if st.button("Save This Mode") and new_mode in st.session_state.get('custom_modes', {}):
             save_tanks()
             st.success(f"Saved mode: {new_mode}")
 
     with st.expander("🛠️ Manage Custom Modes"):
         if st.session_state.custom_modes:
-            sel = st.selectbox("Edit Mode", list(st.session_state.custom_modes.keys()))
+    sel = st.selectbox("Edit Mode", list(st.session_state.get('custom_modes', {}).keys()))
             updated = {}
-            for param, (low, high) in st.session_state.custom_modes[sel].items():
+    for param, (low, high) in st.session_state.get('custom_modes', {}).get(sel, {}).items():
                 col1, col2, col3, col4 = st.columns([4, 2, 2, 1])
                 with col1:
                     st.markdown(f"**{param}**")
@@ -231,11 +234,11 @@ with st.sidebar:
                 if not remove:
                     updated[param] = (new_low, new_high)
             if st.button("💾 Save Changes"):
-                st.session_state.custom_modes[sel] = updated
+    st.session_state.get('custom_modes', {})[sel] = updated
                 save_tanks()
                 st.success(f"Updated mode: {sel}")
             if st.button("🗑️ Delete This Mode"):
-                del st.session_state.custom_modes[sel]
+    del st.session_state.get('custom_modes', {})[sel]
                 save_tanks()
                 st.experimental_rerun()
 
@@ -243,7 +246,7 @@ with st.sidebar:
 st.title("🧪 Marine Reef Tank Tracker")
 
 if st.session_state.selected_tank:
-    tank = st.session_state.tanks[st.session_state.selected_tank]
+tank = st.session_state.get('tanks', {}).get(st.session_state.get('selected_tank'))
     tabs = st.tabs(["Overview", "Log Parameters", "Maintenance", "Diary", "Trends"])
 
     with tabs[0]:
@@ -438,7 +441,7 @@ with st.expander("🔧 Equipment Configuration", expanded=True):
                 pdf = FPDF()
                 pdf.add_page()
                 pdf.set_font("Arial", size=12)
-                pdf.cell(200, 10, txt=strip_unicode(f"Tank Report: {st.session_state.selected_tank}"), ln=True)
+pdf.cell(200, 10, txt=strip_unicode(f"Tank Report: {st.session_state.get('selected_tank')}", ln=True))
                 pdf.cell(200, 10, txt=strip_unicode(f"Theme: {tank.get('theme', '')}"), ln=True)
                 pdf.cell(200, 10, txt=strip_unicode(f"Livestock: {tank.get('livestock', '')}"), ln=True)
                 pdf.cell(200, 10, txt=strip_unicode(f"Mode: {tank.get('mode', '')}"), ln=True)
